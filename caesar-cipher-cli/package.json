@@ -1,0 +1,15 @@
+{
+  "name": "caesar-cipher-cli",
+  "version": "1.0.0",
+  "description": "application for encoding / decoding text with Caesar cipher",
+  "main": "caesar-cipher-cli-app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XIIIcool/rs-school-tasks/caesar-cipher-cli"
+  },
+  "author": "Malinouski Maksim (@XIIIcool)",
+  "license": "ISC"
+}
