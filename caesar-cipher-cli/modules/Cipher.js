@@ -5,8 +5,14 @@ class Cipher {
 
     constructor() {
 
-        this.alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        this.alphabetNoUpperCase = 'abcdefghijklmnopqrstuvwxyz';
+        this.alphabetUpperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+    }
+
+    isUpperCase(symbol) {
+        let isUpperCase = symbol.toUpperCase() === symbol;
+        return (!!isUpperCase);
     }
 
     /**
@@ -16,17 +22,31 @@ class Cipher {
      * @returns {string}
      */
     encode(text, shift) {
-        let correctedAlphabet = this.shiftAlphabert(shift);
 
-        var encryptedMessage = '';
+        let correctedAlphabetNUC = this.shiftAlphabert(shift, this.alphabetNoUpperCase);
+        let correctedAlphabetUC = this.shiftAlphabert(shift, this.alphabetUpperCase);
+
+        let encryptedMessage = '';
+        let indexOfLetter = '';
 
         for (let i = 0; i < text.length; i++) {
-            let indexOfLetter = this.alphabet.indexOf(text[i]);
+
+            if (this.isUpperCase(text[i])) {
+                indexOfLetter = this.alphabetUpperCase.indexOf(text[i]);
+            } else {
+                indexOfLetter = this.alphabetNoUpperCase.indexOf(text[i]);
+            }
 
             if (indexOfLetter === -1) {
                 encryptedMessage = encryptedMessage.concat(text[i]);
             } else {
-                encryptedMessage = encryptedMessage.concat(correctedAlphabet[indexOfLetter]);
+
+                if (this.isUpperCase(text[i])) {
+                    encryptedMessage = encryptedMessage.concat(correctedAlphabetUC[indexOfLetter]);
+                } else {
+                    encryptedMessage = encryptedMessage.concat(correctedAlphabetNUC[indexOfLetter]);
+                }
+
             }
 
         }
@@ -42,37 +62,53 @@ class Cipher {
      * @returns {string}
      */
     decode(text, shift) {
-        let shiftedAlphabet = this.shiftAlphabert(shift);
+
+        let correctedAlphabetNUC = this.shiftAlphabert(shift, this.alphabetNoUpperCase);
+        let correctedAlphabetUC = this.shiftAlphabert(shift, this.alphabetUpperCase);
+
         let encryptedMessage = '';
+        let indexOfLetter = '';
+
         for (let i = 0; i < text.length; i++) {
             if (text[i] === ' ') {
                 encryptedMessage = encryptedMessage.concat(' ');
                 continue;
             }
-            let indexOfLetter = shiftedAlphabet.indexOf(text[i]);
+
+            if (this.isUpperCase(text[i])) {
+                indexOfLetter = correctedAlphabetUC.indexOf(text[i]);
+            } else {
+                indexOfLetter = correctedAlphabetNUC.indexOf(text[i]);
+            }
 
             if (indexOfLetter === -1) {
                 encryptedMessage = encryptedMessage.concat(text[i]);
             } else {
-                encryptedMessage = encryptedMessage.concat(this.alphabet[indexOfLetter]);
+                if (this.isUpperCase(text[i])) {
+                    encryptedMessage = encryptedMessage.concat(this.alphabetUpperCase[indexOfLetter]);
+                } else {
+                    encryptedMessage = encryptedMessage.concat(this.alphabetNoUpperCase[indexOfLetter]);
+                }
             }
 
         }
 
         return encryptedMessage;
+
     }
 
     /**
      *
      * @param shift
+     * @param alphabet
      * @returns {string}
      */
-    shiftAlphabert(shift) {
+    shiftAlphabert(shift, alphabet) {
 
-        var shiftedAlphabet = '';
-        for (var i = 0; i < this.alphabet.length; i++) {
+        let shiftedAlphabet = '';
+        for (let i = 0; i < alphabet.length; i++) {
 
-            let currentLetter = (this.alphabet[i + shift] === undefined) ? (this.alphabet[i + shift - this.alphabet.length]) : (this.alphabet[i + shift]);
+            let currentLetter = (alphabet[i + shift] === undefined) ? (alphabet[i + shift - alphabet.length]) : (alphabet[i + shift]);
 
             shiftedAlphabet = shiftedAlphabet.concat(currentLetter);
         }
