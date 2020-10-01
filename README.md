@@ -17,15 +17,15 @@
 
 далее примеры показаны с запуском из папки с программой
 
-1. Запускаем кодирование/декодирование из файла с записью в файла
-`node caesar-cipher-cli-app.js --a encode -s 1 -i "input.txt" -o "output.txt"`
+1. Запускаем кодирование/декодирование из файла с записью в файла \
+`node caesar-cipher-cli-app.js --a encode -s 1 -i "input.txt" -o "output.txt"` \
 `node caesar-cipher-cli-app.js --a decode -s 1 -i "input.txt" -o "output.txt"`
-2. Запускаем кодирование/декодирование из командной строки с записью в файла
-`node caesar-cipher-cli-app.js --a encode -s 1 -o "output.txt"`
+2. Запускаем кодирование/декодирование из командной строки с записью в файла \
+`node caesar-cipher-cli-app.js --a encode -s 1 -o "output.txt"` \
 `node caesar-cipher-cli-app.js --a decode -s 1 -o "output.txt"`
-3. Запускаем кодирование/декодирование из командной строки с записью в командную строку
-`node caesar-cipher-cli-app.js --a encode -s 1 
-`node caesar-cipher-cli-app.js --a decode -s 1 
-4. Запускаем кодирование/декодирование из файла в командную строку
-`node caesar-cipher-cli-app.js --a encode -s 1 -i "input.txt"
-`node caesar-cipher-cli-app.js --a decode -s 1 -i "input.txt"
+3. Запускаем кодирование/декодирование из командной строки с записью в командную строку \
+`node caesar-cipher-cli-app.js --a encode -s 1 ` \
+`node caesar-cipher-cli-app.js --a decode -s 1 `
+4. Запускаем кодирование/декодирование из файла в командную строку \
+`node caesar-cipher-cli-app.js --a encode -s 1 -i "input.txt"` \
+`node caesar-cipher-cli-app.js --a decode -s 1 -i "input.txt"`
