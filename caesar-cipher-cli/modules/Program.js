@@ -1,8 +1,13 @@
 const {program} = require('commander');
+const validateActions = ['encode', 'decode'];
 
 program
     .requiredOption('-a, --actions <type>', ' an action encode/decode')
-    .requiredOption('-s, --shift <number>', ' a shift (integer argument)', (value, dummyPrevious) => {
+    .requiredOption('-s, --shift <number>', ' a shift (integer argument)', (value) => {
+        if (parseInt(value) < 0) {
+            process.stderr.write(`error: -s --shift need only positive number`);
+            process.exit(400);
+        }
         return parseInt(value);
     })
     .option('-i, --input <type>', ' an input file')
@@ -11,17 +16,16 @@ program
 program.parse(process.argv);
 
 if (isNaN(program.shift)) {
-    // TODO RETURN ERROR need integer value;
-    console.error('error: -s --shift need integer value');
-    throw new Error('error: -s --shift need integer value');
+    process.stderr.write(`error: -s --shift need integer value`);
+    process.exit(400);
 }
 
 if (program.actions) {
     if (validateActions.indexOf(program.actions.toLowerCase().trim()) !== -1) {
 
     } else {
-        console.error('error: -a --actions unknown parameter');
-        throw new Error('error: -a --actions unknown parameter');
+        process.stderr.write(`error: -a --actions unknown parameter`);
+        process.exit(400);
     }
 }
 

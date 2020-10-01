@@ -1,4 +1,4 @@
-const { pipeline, Transform } = require('stream');
+const {Transform} = require('stream');
 const Cipher = require('./Cipher');
 
 /**
@@ -12,6 +12,7 @@ class Transformer extends Transform {
         this.action = action;
         this.shift = shift;
     }
+
     /**
      *
      * @param chunk
@@ -19,9 +20,9 @@ class Transformer extends Transform {
      * @param callback
      * @private
      */
-    _transform (chunk, encoding, callback) {
+    _transform(chunk, encoding, callback) {
         if (encoding === 'buffer') {
-            if(this.action === 'encode' ) {
+            if (this.action === 'encode') {
                 chunk = Cipher.encode(chunk.toString(), this.shift);
             } else {
                 chunk = Cipher.decode(chunk.toString(), this.shift);
