@@ -1,8 +1,10 @@
 const {program} = require('commander');
 const validateActions = ['encode', 'decode'];
 
+program.storeOptionsAsProperties(true);
+
 program
-    .requiredOption('-a, --actions <type>', ' an action encode/decode')
+    .requiredOption('-a, --action <type>', ' an action encode/decode')
     .requiredOption('-s, --shift <number>', ' a shift (integer argument)', (value) => {
         if (parseInt(value) < 0) {
             process.stderr.write(`error: -s --shift need only positive number`);
@@ -20,8 +22,8 @@ if (isNaN(program.shift)) {
     process.exit(400);
 }
 
-if (program.actions) {
-    if (validateActions.indexOf(program.actions.toLowerCase().trim()) !== -1) {
+if (program.action) {
+    if (validateActions.indexOf(program.action.toLowerCase().trim()) !== -1) {
 
     } else {
         process.stderr.write(`error: -a --actions unknown parameter`);

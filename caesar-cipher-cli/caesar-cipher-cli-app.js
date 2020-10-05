@@ -7,7 +7,7 @@ const endOfLine = require('os').EOL;
 
 // если указан параметр ввода и вывода
 if(program.input && program.output){
-    Filer.processFile(program.input, program.shift, program.output, program.actions);
+    Filer.processFile(program.input, program.shift, program.output, program.action);
 }
 
 // если нету вводных и выводных параметров
@@ -24,20 +24,20 @@ if(!program.input && !program.output){
 
         let result;
 
-        if(program.actions === 'encode'){
+        if(program.action === 'encode'){
             result = Cipher.encode(userInput, program.shift);
-        } else if(program.actions === 'decode'){
+        } else if(program.action === 'decode'){
             result = Cipher.decode(userInput, program.shift);
         }
 
-        console.log(`Your ${program.actions} text: ${result}`);
+        console.log(`Your ${program.action} text: ${result}`);
 
     })
 }
 
 // есть есть вводной параметр и нет выводного
 if(program.input && !program.output) {
-    Filer.processFileReturn(program.input, program.shift, program.output, program.actions);
+    Filer.processFileReturn(program.input, program.shift, program.output, program.action);
 }
 
 // если нет входного но есть выходной
@@ -51,7 +51,7 @@ if(!program.input && program.output) {
 
     rl.on('line', (userInput) => {
 
-        Filer.processStdinToFile(Readable.from([userInput + endOfLine]), program.shift, program.output, program.actions);
+        Filer.processStdinToFile(Readable.from([userInput + endOfLine]), program.shift, program.output, program.action);
 
     })
 }
